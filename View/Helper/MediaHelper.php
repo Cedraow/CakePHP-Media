@@ -20,6 +20,27 @@ class MediaHelper extends AppHelper{
 	}
 
 	public function resizedUrl($image, $width, $height){
+
+		if($width == null OR $height == null)
+		{
+			//on récupère l'extensipn
+			$ext=pathinfo($image,PATHINFO_EXTENSION);debug($ext);
+			if($ext == 'jpeg' OR $ext == 'jpg') $img = ImageCreateFromJpeg(WWW_ROOT.$image);
+			if($ext == 'png') $img = imagecreatefrompng(WWW_ROOT.$image);
+			$Ini_Height = ImageSY($img);
+			$Ini_Width = ImageSX($img);
+
+			if($width == null)
+			{
+				$width = round(($Ini_Width*$height)/$Ini_Height, 2);
+			}
+
+			if($height == null)
+			{
+				$height = round(($width*$Ini_Height)/$Ini_Width, 2);
+			}
+		}
+
 		$this->pluginDir = dirname(dirname(dirname(__FILE__)));
 		$image = trim($image, '/');
 		$pathinfo = pathinfo($image);
