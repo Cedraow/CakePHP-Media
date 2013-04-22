@@ -24,7 +24,7 @@ class MediaHelper extends AppHelper{
 		if($width == null OR $height == null)
 		{
 			//on récupère l'extensipn
-			$ext=pathinfo($image,PATHINFO_EXTENSION);debug($ext);
+			$ext=pathinfo($image,PATHINFO_EXTENSION);
 			if($ext == 'jpeg' OR $ext == 'jpg') $img = ImageCreateFromJpeg(WWW_ROOT.$image);
 			if($ext == 'png') $img = imagecreatefrompng(WWW_ROOT.$image);
 			$Ini_Height = ImageSY($img);
